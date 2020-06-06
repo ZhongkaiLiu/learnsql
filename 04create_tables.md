@@ -23,7 +23,35 @@ CREATE TABLE student (
     major VARCHAR(20)
 );
 
+-- show schema of table
 DESCRIBE student; 
+```
+
+## Set Primary Key
+```sql
+CREATE TABLE student (
+    student_id INT,
+    name VARCHAR(20),
+    major VARCHAR(20),
+    PRIMARY KEY(student_id)
+);
+```
+
+## Set Foreign Key While Creating Table
+```sql
+CREATE TABLE branch (
+    branch_id INT PRIMARY KEY,
+    branch_name VARCHAR(40),
+    mgr_id INT,
+    mgr_start_date DATE,
+    FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+);
+```
+
+## Set Foreign Key After Creating Table
+```sql
+ALTER TABLE employee
+ADD FOREIGN KEY(branch_id) REFERENCES branch(branch_id) ON DELETE SET NULL;
 ```
 
 ## Delete table
@@ -33,7 +61,11 @@ DROP TABLE student;
 
 ## Add / Delete column
 ```sql
-ALTER TABLE student ADD gpa DECIMAL(3, 2);
+ALTER TABLE student 
+ADD gpa DECIMAL(3, 2);
+```
 
-ALTER TABLE student DROP COLUMN gpa;
+```sql
+ALTER TABLE student 
+DROP COLUMN gpa;
 ```
